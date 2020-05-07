@@ -1,0 +1,10 @@
+<h1><%= course.name %></h1>
+<h2><%= course.description %></h2>
+
+<% groups.each do |group| %>
+  <div>
+    <span>Дата начала курса</span>
+    <span><%= group.start_date %></span>
+    <span><%= group.users.count %></span>
+  </div>
+<% end %>

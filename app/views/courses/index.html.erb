@@ -1,0 +1,22 @@
+<h1>Список достпных курсов</h1>
+
+<table>
+  <thead>
+      <tr>
+      <td>Название</td>
+      <td>Описание</td>
+      <td>Дата начала</td>
+      <td>Количество учеников</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% courses.each do |course| %>
+      <tr>
+        <td><%= link_to course.name, course %></td>
+        <td><%= course.description %></td>
+        <td><%= course.next_group %></td>
+        <td><%= course.users_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
