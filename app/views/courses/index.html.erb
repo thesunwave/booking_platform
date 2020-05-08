@@ -3,9 +3,9 @@
 <table>
   <thead>
       <tr>
-      <td>Название</td>
+      <td>Название(<%= link_to 'asc', courses_path(sort_by: 'name_asc') %>, <%= link_to 'desc', courses_path(sort_by: 'name_desc') %>)</td>
       <td>Описание</td>
-      <td>Дата начала</td>
+      <td>Дата начала(<%= link_to 'asc', courses_path(sort_by: 'groups_asc') %>, <%= link_to 'desc', courses_path(sort_by: 'groups_desc') %>)</td>
       <td>Количество учеников</td>
     </tr>
   </thead>
