@@ -17,6 +17,7 @@ courses = Course.create!(
 
 courses.each.with_index do |c, i|
   Group.create!(start_date: Date.tomorrow + i.send(:day), course: c)
+  Group.create!(start_date: Date.tomorrow + 1.week + i.send(:day), course: c)
 end
 
 %w(one@mail.ru two@mail.ru three@mail.ru).each do |email|

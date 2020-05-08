@@ -7,4 +7,18 @@
     <span><%= group.start_date %></span>
     <span><%= group.users.count %></span>
   </div>
+
+  <%- if group.allow_to_join? %>
+    <%# byebug %>
+    <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+    <% end %>
+    <p>Записаться на курс</p>
+    <%= form_with model: group, url: course_group_join_path(course_id: course.id, group_id: group.id), method: "POST", local: true do |f| %>
+      <%= f.text_field :email %>
+      <%= f.submit "Create" %>
+    <% end %>
+  <% end %>
 <% end %>

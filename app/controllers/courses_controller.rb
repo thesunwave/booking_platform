@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
       courses = courses.value!.map { |c| Courses::Decorators::Record.new(c) }
       render :index, locals: { courses: courses }
     else
-      # raise ActiveRecord::StatementInvalid
+      render not_found
     end
   end
 

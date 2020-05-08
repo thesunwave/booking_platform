@@ -3,4 +3,8 @@ class Group < ApplicationRecord
   belongs_to :course
 
   scope :allowed_to_check_in, -> { where('start_date > ?', Date.current) }
+
+  def allow_to_join?
+    start_date > Date.current
+  end
 end

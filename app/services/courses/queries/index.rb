@@ -28,7 +28,6 @@ module Courses
         case field
         when :name
           courses.order({field => direction})
-          # courses.select("courses.*", 'COUNT("groups_users"."user_id") as users_count ').group('courses.id')#.order({field => direction})
         when :groups
           courses.order("groups.start_date #{direction}")
         else
