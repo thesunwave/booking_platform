@@ -4,16 +4,8 @@ RSpec.describe "Courses", type: :request do
 
   describe "GET /index" do
     it "returns http success" do
-      get "/courses/index"
+      get "/courses"
       expect(response).to have_http_status(:success)
     end
   end
-
-  describe "GET /show" do
-    it "returns http success" do
-      get "/courses/show"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end

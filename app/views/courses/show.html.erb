@@ -2,11 +2,22 @@
 <h2><%= course.description %></h2>
 
 <% groups.each do |group| %>
-  <div>
-    <span>Дата начала курса</span>
-    <span><%= group.start_date %></span>
-    <span><%= group.users.count %></span>
-  </div>
+ <table>
+    <tr>
+      <th>Дата начала курса</th>
+      <th>Количество учеников</th>
+      <th>Список учеников</th>
+    </tr>
+    <tr>
+      <td><%= group.start_date %></td>
+      <td><%= group.users.count %></td>
+      <td>
+        <%- group.users.each do |user| %>
+          <p><%=user.email %></p>
+        <% end %>
+      </td>
+    </tr>
+  </table>
 
   <%- if group.allow_to_join? %>
     <%# byebug %>
