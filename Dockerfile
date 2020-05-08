@@ -23,4 +23,4 @@ COPY . $APP_HOME
 EXPOSE 3000
 EXPOSE 3035
 
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "80"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
