@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def join
-    result = Groups::Operations::JoinUser.new(params.to_unsafe_h, record: group).call
+    result = Groups::Operations::JoinUser.new.call(params.to_unsafe_h[:group], group)
 
     if result.success?
       render 'courses/show', locals: { course: course, groups: course.groups }, status: :created
@@ -8,9 +8,10 @@ class GroupsController < ApplicationController
       case error = result.failure
       when Dry::Validation::Result
         flash.now[:error] = error.errors.to_h
-        render 'courses/show', locals: { course: course, groups: course.groups }, status: :unprocessable_entity #course_path(group.course)
+        render 'courses/show', locals: { course: course, groups: course.groups }, status: :unprocessable_entity
       else
-        render 'courses/show', locals: { course: course, groups: course.groups }, status: :unprocessable_entity #course_path(group.course)
+        flash.now[:error] = error
+        render 'courses/show', locals: { course: course, groups: course.groups }, status: :unprocessable_entity
       end
     end
   end

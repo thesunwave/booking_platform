@@ -3,12 +3,9 @@ require 'rails_helper'
 RSpec.describe Groups::Operations::JoinUser do
   subject do
      described_class.new(
-       params,
-       record: model,
        input_validator: input_validator,
-       user_exists_check: user_exists_check,
-       user_creator: user_creator
-      ).call
+       user_finder: user_finder,
+      ).call(params, model)
   end
 
   let(:model) { FactoryBot.create(:group) }
@@ -20,10 +17,7 @@ RSpec.describe Groups::Operations::JoinUser do
 
     context 'when user is already joined' do
       let(:input_validator) { -> (*) { Dry::Monads::Success(params) } }
-      let(:user_exists_check) do
-        double(new: -> { Dry::Monads::Success(user) })
-      end
-      let(:user_creator) { -> { Dry::Monads::Success() } }
+      let(:user_finder) { -> { Dry::Monads::Success(user) } }
 
       before do
         model.users << user
@@ -36,10 +30,7 @@ RSpec.describe Groups::Operations::JoinUser do
 
     context 'when user is not joined' do
       let(:input_validator) { -> (*) { Dry::Monads::Success(params) } }
-      let(:user_exists_check) do
-        double(new: -> { Dry::Monads::Success(user) })
-      end
-      let(:user_creator) { -> { Dry::Monads::Success() } }
+      let(:user_finder) { -> (*) { Dry::Monads::Success(user) } }
 
       it 'will be added user to a group' do
         expect { subject }.to change { model.users.count }

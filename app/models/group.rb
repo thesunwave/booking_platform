@@ -7,4 +7,13 @@ class Group < ApplicationRecord
   def allow_to_join?
     start_date > Date.current
   end
+
+  def joined_user?(payload)
+    users.where(payload).exists?
+  end
+
+  def join_user(user)
+    users << user
+    self
+  end
 end

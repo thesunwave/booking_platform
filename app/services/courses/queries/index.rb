@@ -1,12 +1,11 @@
 module Courses
   module Queries
     class Index < Core::Operation
-      def initialize(model, sort_by = {})
+      def initialize(model: Course)
         @model = model
-        @sort_by = sort_by
       end
 
-      def call
+      def call(sort_by)
         Try() do
           sort(courses, sort_by)
         end.to_result
@@ -14,14 +13,14 @@ module Courses
 
       private
 
-      attr_reader :model, :sort_by
+      attr_reader :model
 
       def courses
         @courses ||= model.includes(:groups)
       end
 
       def sort(courses, sort_rule)
-        return courses if sort_rule.nil? || sort_rule.empty?
+        return courses if sort_rule.blank?
 
         field, direction = prepare_sorting_rules(sort_rule)
 

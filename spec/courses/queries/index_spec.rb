@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Courses::Queries::Index do
-  subject { described_class.new(model, sort_by).call}
+  subject { described_class.new(model: model).call(sort_by)}
 
   let(:model) { Course }
 

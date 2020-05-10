@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   def index
-    courses = Courses::Queries::Index.new(Course, params[:sort_by]).call
+    courses = Courses::Queries::Index.new.call(params[:sort_by])
 
     if courses.success?
       courses = courses.value!.map { |c| Courses::Decorators::Record.new(c) }
